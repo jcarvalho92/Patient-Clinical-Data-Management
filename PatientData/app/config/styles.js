@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
         height: 78,
         resizeMode : 'stretch',
     },
+    appImageRadio:{
+        height: 20,
+        width: 20,
+        marginHorizontal: 5,
+    },
     appSimpleTexts: {
         color: colors.light,
         marginTop: 20,
@@ -67,6 +72,11 @@ const styles = StyleSheet.create({
         fontSize: 18, 
         textAlign: "center", 
         marginTop: 5
+    },
+    appViewButton:{
+        marginTop: 30,
+        alignItems: "center",
+        marginLeft: 80,
     },
     appViewButtonSignIn:{
         padding: 70
@@ -90,23 +100,36 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1.5,
         width: 300,
         marginLeft: 30,
+        height: 40,
+    },
+    appViewInputsMarginTop: {
+        borderBottomColor: colors.light,
+        borderBottomWidth: 1.5,
+        width: 300,
+        marginLeft: 30,
         height: 20,
+        marginTop: 60
     },
     appViewListPatients:{
         marginTop: 30,
         backgroundColor: colors.light,
         width: 415
     },
+    appViewRadio: {
+        marginTop: 10,
+        marginLeft: 30,
+        height: 50
+    },
+    appViewRadioButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
+      },
     appViewTitleListPatients:{
         height: 40, 
         borderColor: colors.grey, 
         borderWidth: 1
     }
-    
-    
-    
-     
-      
 
 })
   

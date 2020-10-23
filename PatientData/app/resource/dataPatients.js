@@ -52,5 +52,19 @@ export const patientList = [
     }
   ]
 
- 
+export const provinces = [
+  {      value: "AB",    },
+  {      value: "BC",    },
+  {      value: "MB",    },
+  {      value: "NB",    },
+  {      value: "NL",    },
+  {      value: "NT",    },
+  {      value: "NS",    },
+  {      value: "NU",    },
+  {      value: "ON",    },
+  {      value: "PE",    },
+  {      value: "QC",    },
+  {      value: "YT",    }
+];
+
 
