@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { SafeAreaView, View , TouchableOpacity, Image, Text, TextInput, FlatList} from 'react-native';
+import { SafeAreaView, View , TouchableOpacity, Image, Text, TextInput} from 'react-native';
 import styles from '../config/styles'
 import colors from '../config/colors'
 import * as api from '../resource/api'
@@ -156,8 +156,11 @@ function AddPatientScreen({navigation}) {
 
      <View style={styles.appViewButton}>
         <TouchableOpacity style={styles.appButtonContainer} activeOpacity={0.5}  
-        onPress={() => api.sendPatientDataToApi(patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email)}>
-    
+        onPress={() => 
+        api.sendPatientDataToApi(patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email)
+        
+        }>
+          
 
          <Text style={styles.appButtonText}>Submit</Text>
         </TouchableOpacity>

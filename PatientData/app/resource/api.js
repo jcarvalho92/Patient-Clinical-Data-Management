@@ -1,7 +1,9 @@
+import React, { useState } from "react";
+import { Alert } from "react-native";
 
 export function sendPatientDataToApi(patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email){
-    try{
-      fetch("http://127.0.0.1:3000/api/patients", {
+
+    fetch("http://127.0.0.1:2000/api/patients", {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -19,11 +21,25 @@ export function sendPatientDataToApi(patientName,age, gender, addr1, addr2,city,
       mobNumb: mobNumb, 
       email: email
     })
+  }).then(response => response.json())
+  .then(result => {
+    Alert.alert(
+      "Submission", "succeded!!!", "Ok",
+      { cancelable: false }
+    );
+  })
+  .catch(error => {
+    Alert.alert(
+      "Submission", "Failed! Press fill all information", "Ok",
+      { cancelable: false }
+    );
   });
-    }
-    catch(e){
-      console.log(e);
-    }
+
+
+  
+ 
+  
   }
+
   
 

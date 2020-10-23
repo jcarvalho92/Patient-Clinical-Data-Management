@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
         width: 20,
         marginHorizontal: 5,
     },
+    appScrollView: {
+        height: '100%',
+        width: '100%',
+      },
     appSimpleTexts: {
         color: colors.light,
         marginTop: 20,
@@ -64,19 +68,39 @@ const styles = StyleSheet.create({
         color: colors.red, 
         padding: 10
     },
+    appTextData:{
+        color: colors.primary,
+        marginTop: 10,
+        fontSize: 14,
+        fontWeight: 'bold'
+    },
     appTextsInput: {
         color: colors.light,
     },
+    appTextTitle: {
+        color: colors.light,
+        marginTop: 10,
+        fontSize: 14,
+        fontWeight: 'bold'
+      },
     appTextTitleListPatients:{
         fontWeight: "bold", 
         fontSize: 18, 
         textAlign: "center", 
         marginTop: 5
     },
+    appTextViewAllPatients:
+    {
+        color: colors.dark, 
+        fontWeight: "bold",
+        padding: 10
+    },
+   
     appViewButton:{
         marginTop: 30,
         alignItems: "center",
         marginLeft: 80,
+        
     },
     appViewButtonSignIn:{
         padding: 70
@@ -86,6 +110,23 @@ const styles = StyleSheet.create({
         position: 'absolute',
         padding: 5,
     },
+    appViewRecord:{
+        marginTop: 50,
+        marginLeft: 30
+    },
+    appContainerListPatients:{
+      
+        marginTop: 100,
+        backgroundColor: colors.light,
+        width: 415
+    },
+    appViewAddRecord:{
+        marginTop: 60
+    },
+    appViewData:{
+        marginLeft: 30,
+        marginTop: 40
+       },
     appViewHorizontalFirstRow: {
         flexDirection: 'row',
         marginTop: 50
@@ -107,18 +148,39 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1.5,
         width: 300,
         marginLeft: 30,
-        height: 20,
-        marginTop: 60
+        height: 40,
+        marginTop: 50
     },
     appViewListPatients:{
         marginTop: 30,
         backgroundColor: colors.light,
         width: 415
     },
+    appViewListAllPatientsCritical:{
+        backgroundColor: colors.red,
+        height: 40, 
+        borderColor: colors.grey, 
+        borderWidth: 1
+    },
+    appViewListAllPatients:{
+        backgroundColor:colors.light,
+        height: 40, 
+        borderColor: colors.grey, 
+        borderWidth: 1
+    },
     appViewRadio: {
         marginTop: 10,
         marginLeft: 30,
         height: 50
+    },
+    appViewRadioSearchScreen: {
+        marginTop: 10,
+        marginLeft: 30,
+        height: 50,
+        marginBottom: 30
+    },
+    appViewRadioMarginBottom: {
+        marginBottom:20
     },
     appViewRadioButton: {
         flexDirection: 'row',
@@ -129,7 +191,7 @@ const styles = StyleSheet.create({
         height: 40, 
         borderColor: colors.grey, 
         borderWidth: 1
-    }
+    },
 
 })
   
