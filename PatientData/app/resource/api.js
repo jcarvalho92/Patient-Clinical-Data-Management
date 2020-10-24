@@ -30,7 +30,7 @@ export function sendPatientDataToApi(patientName,age, gender, addr1, addr2,city,
   })
   .catch(error => {
     Alert.alert(
-      "Submission", "Failed! Press fill all information", "Ok",
+      "Submission", "Failed! Please fill all information", "Ok",
       { cancelable: false }
     );
   });

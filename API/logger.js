@@ -9,11 +9,11 @@ function log(req, res, next){
     else if(req.method=== "GET")
         get++
 
-    console.log(`products ${req.method} received request`);
+    console.log(`Patients ${req.method} received request`);
     console.log(`Processed Request Count --> Get: ${get}, Post: ${post}`);
 
     next();
-    console.log(`products ${req.method} sending response`);
+    console.log(`Patients ${req.method} sending response`);
 }
 
 
