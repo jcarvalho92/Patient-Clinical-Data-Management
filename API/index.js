@@ -14,7 +14,7 @@ app.use(logger);
 
 
 const patients = [
-    {id: 1, patientName: 'Abdeali Mody', age: '20', gender: 'M' , addr1: '9, Brigadoon Cresent' , addr2: '' , city: 'Scarborough' , province: 'ON' , postcode: 'M1T 3C2' , mobNumb: '647-685-0253' , email: 'modyabdeali53@gmail.com' } ,
+    {id: 1, patientName: 'Abdeali Mody', age: '20', gender: 'M' , addr1: '9 Brigadoon Cresent' , addr2: '' , city: 'Scarborough' , province: 'ON' , postcode: 'M1T 3C2' , mobNumb: '647-685-0253' , email: 'modyabdeali53@gmail.com' } ,
     {id: 2, patientName: 'Juliana de Carvalho', age: '25', gender: 'F' , addr1: '30 Castleton Ave' , addr2: '' , city: 'Toronto' , province: 'ON' , postcode: 'M6N 3Z8' , mobNumb: '437-242-8226' , email: 'Juliana@gmail.com' } 
 ]
 
@@ -44,10 +44,9 @@ app.post('/api/patients', async (req,res)  =>{
         age: Joi.number() .required(),
         gender: Joi.string() .required(),
         addr1: Joi.string() .required(),
-        addr2: Joi.string(),
         city: Joi.string() .required(),
-        province: Joi.string() .max(7) .required(),
-        postcode: Joi.string() .required(),
+        province: Joi.string()  .required(),
+        postcode: Joi.string() .max(7) .required(),
         mobNumb: Joi.string() .required(),
         email: Joi.string() .required() });
         
