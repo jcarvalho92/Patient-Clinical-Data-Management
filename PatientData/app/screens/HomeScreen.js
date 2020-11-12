@@ -2,7 +2,6 @@ import React from 'react';
 import { SafeAreaView, View , TouchableOpacity, Image, Text, FlatList} from 'react-native';
 
 import styles from '../config/styles'
-import * as DataPatients from '../resource/dataPatients'
  
 function HomeScreen({navigation}) {
     return (
@@ -64,7 +63,7 @@ function HomeScreen({navigation}) {
           <Text style={styles.appTextTitleListPatients}>Critical Cases</Text>
         </View>
         <FlatList 
-          data={DataPatients.patientList}
+          /*data={DataPatients.patientList}
           renderItem={({item, index}) => 
           {
             if (item.status.toString() == "critical")
@@ -77,6 +76,7 @@ function HomeScreen({navigation}) {
             }
           }}
           keyExtractor={(item, index) => index.toString()}
+          */
         />
       </View>
     </SafeAreaView>

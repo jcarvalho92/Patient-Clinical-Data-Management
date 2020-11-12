@@ -2,9 +2,13 @@ import React, {useState} from 'react';
 import { SafeAreaView, View , TouchableOpacity, Text,TextInput, Image} from 'react-native';
 import styles from '../config/styles'
 import colors from '../config/colors'
+import * as api from '../resource/api'
 
+var patientInfo
+var searchChecked
 function SearchPatientScreen({navigation}) {
-    const [searchChecked, setSearchOptionChecked] = useState(0);
+     [patientInfo, setPatientInfo] = useState("");
+     [searchChecked, setSearchOptionChecked] = useState(0);
     var searchPatientOptions = ['Search Patient By ID', 'Search Patient By Name'];
     return (
     <SafeAreaView style={styles.appBackground} >
@@ -50,17 +54,28 @@ function SearchPatientScreen({navigation}) {
           <TextInput
             style={styles.appTextsInput}
             placeholder="Type Here" placeholderTextColor={colors.light}
+            onChangeText={(patientInfo) => setPatientInfo(patientInfo)}
+            value={patientInfo}
           >
           </TextInput>
         </View>
         <View style={[styles.appAlignCenter,{marginTop: 40}]}>
-          <TouchableOpacity style={styles.appButtonContainer}  activeOpacity={0.5}  onPress={() => navigation.navigate("View Patient")} >
+          <TouchableOpacity 
+              style={styles.appButtonContainer}  activeOpacity={0.5}  
+              onPress={() => getPatientInfo({navigation})}
+          >
             <Text style={styles.appButtonText}>Search</Text>
           </TouchableOpacity>
         </View>
       </View> 
     </SafeAreaView>
     );
+}
+
+ async function getPatientInfo({navigation}){
+  
+  let result = await (searchChecked == 0 ? api.getPatientByIDFromApi(patientInfo) : api.getPatientByNameFromApi(patientInfo))
+  navigation.navigate("View Patient",result)
 }
 
 export default SearchPatientScreen;

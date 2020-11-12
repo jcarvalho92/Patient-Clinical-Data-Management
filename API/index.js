@@ -14,8 +14,8 @@ app.use(logger);
 
 
 const patients = [
-    {id: 1, patientName: 'Abdeali Mody', age: '20', gender: 'M' , addr1: '9 Brigadoon Cresent' , addr2: '' , city: 'Scarborough' , province: 'ON' , postcode: 'M1T 3C2' , mobNumb: '647-685-0253' , email: 'modyabdeali53@gmail.com' } ,
-    {id: 2, patientName: 'Juliana de Carvalho', age: '25', gender: 'F' , addr1: '30 Castleton Ave' , addr2: '' , city: 'Toronto' , province: 'ON' , postcode: 'M6N 3Z8' , mobNumb: '437-242-8226' , email: 'Juliana@gmail.com' } 
+    {id: 1, dateIncluded: "08/24/2020", patientName: 'Abdeali Mody', age: '20', gender: 'M' , addr1: '9 Brigadoon Cresent' , addr2: '' , city: 'Scarborough' , province: 'ON' , postcode: 'M1T 3C2' , mobNumb: '647-685-0253' , email: 'modyabdeali53@gmail.com' } ,
+    {id: 2, dateIncluded: "09/22/2020", patientName: 'Juliana de Carvalho', age: '25', gender: 'F' , addr1: '30 Castleton Ave' , addr2: '' , city: 'Toronto' , province: 'ON' , postcode: 'M6N 3Z8' , mobNumb: '437-242-8226' , email: 'Juliana@gmail.com' } 
 ]
 
 //GET REQUESTS 
@@ -27,7 +27,7 @@ app.get('/api/patients', (req, res) => {
 });
 
 //By using Patient Id
-app.get('/api/patients/:id', (req, res) =>{
+app.get('/api/patients/id=:id', (req, res) =>{
     const patient = patients.find(c => c.id === parseInt(req.params.id));
 
     if(!patient) 
@@ -37,13 +37,27 @@ app.get('/api/patients/:id', (req, res) =>{
     
 });
 
+//By using Patient Name
+app.get('/api/patients/name=:patientName', (req, res) =>{
+    const patient = patients.find(c => c.patientName === req.params.patientName);
+
+    if(!patient) 
+        res.status(404).send('The patient with given Name was not found');
+
+    res.send(patient);
+    
+});
+
 //POST REQUESTS
 app.post('/api/patients', async (req,res)  =>{
     //validanting the input
-    const schema = Joi.object({ patientName: Joi.string() .required(),
+    const schema = Joi.object({ 
+        dateIncluded: Joi.date() .required(),
+        patientName: Joi.string() .required(),
         age: Joi.number() .required(),
         gender: Joi.string() .required(),
         addr1: Joi.string() .required(),
+        addr2: Joi.string() ,
         city: Joi.string() .required(),
         province: Joi.string()  .required(),
         postcode: Joi.string() .max(7) .required(),
@@ -60,6 +74,7 @@ app.post('/api/patients', async (req,res)  =>{
 
     const patient = {
         id: patients.length +1,
+        dateIncluded: req.body.dateIncluded,
         patientName: req.body.patientName,
         age: req.body.age,
         gender: req.body.gender,

@@ -1,11 +1,21 @@
-import React from 'react';
+import React , {useEffect, useState} from 'react';
 import { SafeAreaView, View , TouchableOpacity, Text, FlatList} from 'react-native';
 
 import styles from '../config/styles'
-import * as DataPatients from '../resource/dataPatients'
+import * as api from '../resource/api'
 
 function ViewAllPatientsScreen({navigation}) {
-    return (
+  const [patients, setPatients] = useState([]);
+
+  useEffect(()=> {
+    loadPatients();
+  },[])
+
+  const loadPatients = async () => {
+    const response = await api.getAllPatientsFromApi();
+    setPatients(response);
+  }
+  return (
     <SafeAreaView style={styles.appBackground} >
       <View style={styles.appViewButtonTopRight}>
        <TouchableOpacity activeOpacity={0.5}  onPress={() => navigation.navigate("Home")} >
@@ -14,7 +24,7 @@ function ViewAllPatientsScreen({navigation}) {
      </View>
       <View style={styles.appContainerListPatients}>
         <FlatList 
-          data={DataPatients.patientList}
+          data={patients}
           renderItem={({ item }) => 
           {
             if (item.status == "critical")
@@ -23,7 +33,7 @@ function ViewAllPatientsScreen({navigation}) {
                       <TouchableOpacity
                         key={item.id.toString()}
                       >
-                        <Text style={styles.appTextViewAllPatients}>{item.name}</Text>
+                        <Text style={styles.appTextViewAllPatients}>{item.patientName}</Text>
                       </TouchableOpacity>
                     </View>
             }else{
@@ -31,7 +41,7 @@ function ViewAllPatientsScreen({navigation}) {
                       <TouchableOpacity
                         key={item.id.toString()}
                       >
-                        <Text style={styles.appTextViewAllPatients}>{item.name}</Text>
+                        <Text style={styles.appTextViewAllPatients}>{item.patientName}</Text>
                       </TouchableOpacity>
                     </View>
             }

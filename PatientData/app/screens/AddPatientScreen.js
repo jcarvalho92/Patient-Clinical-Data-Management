@@ -18,7 +18,8 @@ function AddPatientScreen({navigation}) {
     const [mobNumb, setMobNumb] = React.useState('');
     const [email, setEmail] = React.useState('');
     var genderOption = ['F', 'M'];
-    
+    var today = new Date();
+    date = parseInt(today.getMonth()+1) + "/"+ today.getDate() +"/"+ today.getFullYear();
 
     return (
     <SafeAreaView style={styles.appBackground} >
@@ -157,11 +158,9 @@ function AddPatientScreen({navigation}) {
      <View style={styles.appViewButton}>
         <TouchableOpacity style={styles.appButtonContainer} activeOpacity={0.5}  
         onPress={() => 
-        api.sendPatientDataToApi(patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email)
+        api.sendPatientDataToApi(date, patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email)
         
         }>
-          
-
          <Text style={styles.appButtonText}>Submit</Text>
         </TouchableOpacity>
       </View>
