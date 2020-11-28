@@ -27,11 +27,11 @@ function ViewAllPatientsScreen({navigation}) {
           data={patients}
           renderItem={({ item }) => 
           {
-            if (item.status == "critical")
+            if (item.status == "Critical")
             {
               return <View style={styles.appViewListAllPatientsCritical}>
                       <TouchableOpacity
-                        key={item.id.toString()}
+                        key={item.id}
                       >
                         <Text style={styles.appTextViewAllPatients}>{item.patientName}</Text>
                       </TouchableOpacity>
@@ -39,7 +39,7 @@ function ViewAllPatientsScreen({navigation}) {
             }else{
               return <View style={styles.appViewListAllPatients}>
                       <TouchableOpacity
-                        key={item.id.toString()}
+                        key={item.id}
                       >
                         <Text style={styles.appTextViewAllPatients}>{item.patientName}</Text>
                       </TouchableOpacity>

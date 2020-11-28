@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Alert } from "react-native";
 
-var url = "http://127.0.0.1:2000/api/"
-var patientPath = "Patients"
-var RecordPath = "Record"
+var url = "https://patient-data-api.herokuapp.com/api/"
+var patientPath = "patients"
+var recordPath = "records"
 
-export function sendPatientDataToApi(dateIncluded, patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email){
-  axios.post(`${url}${patientPath}`, { 
+export async function sendPatientDataToApi(dateIncluded, patientName,age, gender, addr1, addr2,city,province,postcode,mobNumb,email){
+  await axios.post(`${url}${patientPath}`, { 
       dateIncluded: dateIncluded,
       patientName: patientName, 
       age: age, 
@@ -38,7 +38,7 @@ export function sendPatientDataToApi(dateIncluded, patientName,age, gender, addr
 
   export async function getPatientByIDFromApi(patientID) {
     try {
-        const response =  await axios.get(`${url}${patientPath}/id=${patientID}`);
+        const response =  await axios.get(`${url}${patientPath}/${patientID}`);
         return response.data
     } catch (error) {
         console.error(error);
@@ -51,8 +51,9 @@ export function sendPatientDataToApi(dateIncluded, patientName,age, gender, addr
 
   export async function getPatientByNameFromApi(patientName) {
     try {
-      const response =  await axios.get(`${url}${patientPath}/name=${patientName}`);
-        return response.data      
+      const response =  await axios.get(`${url}${patientPath}/name/${patientName}`);
+      return response.data   
+
     } catch (error) {
       console.error(error);
       Alert.alert(
@@ -75,17 +76,19 @@ export function sendPatientDataToApi(dateIncluded, patientName,age, gender, addr
     }   
   }
 
-  export function sendPatientRecordDataToApi(patientID,bloodPressure, respiratoryRate, bloodOxygen, heartbeatRate,weight,height,temperature){
-
-    axios.post(`${url}${RecordPath}`, { 
-      patientID : patientID,
+  export async function sendPatientRecordDataToApi(dateIncluded, patientID,bloodPressure, respiratoryRate, bloodOxygen, heartbeatRate,weight,height,temperature, status){
+    console.log(`${url}${patientPath}/${patientID}/${recordPath}`);
+    await axios.post(`${url}${patientPath}/${patientID}/${recordPath}`, { 
+      dateIncluded: dateIncluded,
       bloodPressure : bloodPressure, 
       respiratoryRate : respiratoryRate, 
       bloodOxygen : bloodOxygen, 
       heartbeatRate : heartbeatRate,
       weight : weight,
       height : height,
-      temperature : temperature})
+      temperature : temperature,
+      status: status
+    })
     .then(res => {
         console.log(res.data);
         Alert.alert(
@@ -94,9 +97,38 @@ export function sendPatientDataToApi(dateIncluded, patientName,age, gender, addr
         );
     })
     .catch(error => {
+      console.log(error);
       Alert.alert(
-       "Record Submission", "Failed! Please fill all information", "Ok",
+        "Record Submission", "Failed!", "Ok",
         { cancelable: false }
       );
+     
     });
-}
+  }
+
+  export async function getRecordByPatientIDFromApi(patientID) {
+    try {
+        const response =  await axios.get(`${url}${patientPath}/${patientID}/${recordPath}`);
+        return response.data
+    } catch (error) {
+        console.error(error);
+        Alert.alert(
+          "Record by patient id Request", "Failed! Please verify the ID passed", "Ok",
+          { cancelable: false }
+        );
+    }
+  }
+
+  export async function getRecordByPatientNameFromApi(patientName) {
+    try {
+      const response = await axios.get(`${url}${patientPath}/name/${patientName}/${recordPath}`);  
+    
+      return response.data
+    } catch (error) {
+        console.error(error);
+        Alert.alert(
+          "Record by Patient name Request", "Failed! Please verify the ID passed", "Ok",
+          { cancelable: false }
+        );
+    }
+  }

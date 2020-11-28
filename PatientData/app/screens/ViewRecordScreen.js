@@ -3,9 +3,14 @@ import { SafeAreaView, View , TouchableOpacity, Text, ScrollView} from 'react-na
 import styles from '../config/styles'
 import colors from '../config/colors'
 
-function ViewRecordScreen({navigation}) {
-    return (
+function ViewRecordScreen({route, navigation}) {
+  console.log("inside view record screen")
+  const RecordInfo   = route.params  
+
+  return (
+    <ScrollView>
     <SafeAreaView style={styles.appBackground} >
+      
       <View style={styles.appViewButtonTopRight}>
         <TouchableOpacity activeOpacity={0.5}  onPress={() => navigation.navigate("Home")} >
             <Text style={styles.appButtonTopRightText}>Home</Text>
@@ -14,35 +19,45 @@ function ViewRecordScreen({navigation}) {
 
       <View style={styles.appViewRecord}>
        
+        <Text style={styles.appTextTitle}>Doctor Name</Text>
+        <Text style={styles.appTextData}>{RecordInfo.doctor}</Text>
+
+        <Text style={styles.appTextTitle}>Data Included</Text>
+        <Text style={styles.appTextData}>{RecordInfo.dataIncluded}</Text>
+
         <Text style={styles.appTextTitle}>Patient Id</Text>
-        <Text style={styles.appTextData}>123456</Text>
+        <Text style={styles.appTextData}>{RecordInfo.patient_Id}</Text>
 
         <Text style={styles.appTextTitle}>Name</Text>
-        <Text style={styles.appTextData}>Maria</Text>
+        <Text style={styles.appTextData}>{RecordInfo.patientName}</Text>
 
         <Text style={styles.appTextTitle}>Blood Pressure</Text>
-        <Text style={styles.appTextData}>120/80 mm Hg</Text>
+        <Text style={styles.appTextData}>{RecordInfo.bloodPressure}</Text>
 
         <Text style={styles.appTextTitle}>Respiratory Rate</Text>
-        <Text style={styles.appTextData}>12 breaths per minute</Text>
+        <Text style={styles.appTextData}>{RecordInfo.respiratoryRate}</Text>
 
         <Text style={styles.appTextTitle}>Blood Oxygen Level</Text>
-        <Text style={styles.appTextData}>95%</Text>
+        <Text style={styles.appTextData}>{RecordInfo.bloodOxygen}</Text>
 
         <Text style={styles.appTextTitle}>Heartbeats</Text>
-        <Text style={styles.appTextData}>80 beats per minute</Text>
+        <Text style={styles.appTextData}>{RecordInfo.heartbeatRate}</Text>
 
         <Text style={styles.appTextTitle}>Weight</Text>
-        <Text style={styles.appTextData}>60 kg</Text>
+        <Text style={styles.appTextData}>{RecordInfo.weight}</Text>
 
         <Text style={styles.appTextTitle}>Height</Text>
-       <Text style={styles.appTextData}>160 cm</Text>
+       <Text style={styles.appTextData}>{RecordInfo.height}</Text>
 
         <Text style={styles.appTextTitle}>Temperature</Text>
-        <Text style={styles.appTextData}>37.5 C</Text>
+        <Text style={styles.appTextData}>{RecordInfo.temperature}</Text>
 
+        <Text style={styles.appTextTitle}>Status</Text>
+        <Text style={styles.appTextData}>{RecordInfo.status}</Text>
       </View>
+     
     </SafeAreaView>
+    </ScrollView>
     );
 }
 

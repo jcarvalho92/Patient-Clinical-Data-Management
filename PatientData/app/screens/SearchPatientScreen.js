@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { SafeAreaView, View , TouchableOpacity, Text,TextInput, Image} from 'react-native';
+import { SafeAreaView, View , TouchableOpacity, Text,TextInput, Image, Alert} from 'react-native';
 import styles from '../config/styles'
 import colors from '../config/colors'
 import * as api from '../resource/api'
@@ -73,8 +73,8 @@ function SearchPatientScreen({navigation}) {
 }
 
  async function getPatientInfo({navigation}){
-  
   let result = await (searchChecked == 0 ? api.getPatientByIDFromApi(patientInfo) : api.getPatientByNameFromApi(patientInfo))
+
   navigation.navigate("View Patient",result)
 }
 

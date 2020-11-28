@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { SafeAreaView, View , TouchableOpacity, Text, TextInput} from 'react-native';
+import { SafeAreaView, View , TouchableOpacity, Text, TextInput, Image} from 'react-native';
 import styles from '../config/styles'
 import colors from '../config/colors'
+import * as api from '../resource/api'
 
 function AddRecordScreen({navigation}) {
     const [patientID, setPatientID] = React.useState('');
@@ -12,6 +13,11 @@ function AddRecordScreen({navigation}) {
     const [weight, setWeight] = React.useState('');
     const [height, setHeight] = React.useState('');
     const [temperature, setTemperature] = React.useState('');
+    const [checked, setChecked] = useState(-1);
+    var statusOption = ['Normal', 'Critical'];
+    const [status, setStatus] = React.useState('');
+    var today = new Date();
+    date = parseInt(today.getMonth()+1) + "/"+ today.getDate() +"/"+ today.getFullYear();
 
     return (
     <SafeAreaView style={styles.appBackground} >
@@ -26,6 +32,7 @@ function AddRecordScreen({navigation}) {
           style={styles.appTextsInput}
           keyboardType="number-pad"
           placeholder="Patient ID" placeholderTextColor= {colors.light}
+          onChangeText={(patientID) => setPatientID(patientID)}
         >
         </TextInput>
       </View>
@@ -93,14 +100,53 @@ function AddRecordScreen({navigation}) {
         <TextInput
           style={styles.appTextsInput}
           keyboardType="number-pad"
-          placeholder="Temperature (Celcius)" placeholderTextColor= {colors.light}
+          placeholder="Temperature (Celsius)" placeholderTextColor= {colors.light}
           onChangeText={(temperature) => setTemperature(temperature)}
           value={temperature} 
         >
         </TextInput>
       </View>
+      
+      <View style={styles.appViewRadio}>
+        <View style={styles.appViewRadioButton}>
+          <Text style={{color: colors.light}}>Status: </Text>
+          
+            {statusOption.map((statusOption, key) => {
+              return (
+                <View key={statusOption}>
+                  {checked == key ? (
+                   <TouchableOpacity style={styles.appViewRadioButton}>
+                     <Image
+                       style={styles.appImageRadio}
+                       source={require('../assets/images/radio_checked.png')}
+                     />
+                     <Text style={{color: colors.light}}>{statusOption}</Text>
+                   </TouchableOpacity>
+                 ) : (
+                   <TouchableOpacity
+                     onPress={() => {
+                        setChecked(key);
+                        setStatus(statusOption);
+                      }}
+                      style={styles.appViewRadioButton}>
+                      <Image
+                        style={styles.appImageRadio}
+                        source={require('../assets/images/radio_unchecked.png')}
+                      />
+                      <Text style={{color: colors.light}}>{statusOption}</Text>
+                    </TouchableOpacity>
+                 )}
+               </View>
+              );
+            })}
+          </View>
+      </View>
+
       <View style={styles.appViewButton}>
-        <TouchableOpacity style={styles.appButtonContainer}  activeOpacity={0.5}  onPress={() => navigation.navigate("View Record")} >
+        <TouchableOpacity style={styles.appButtonContainer}  activeOpacity={0.5}  
+        onPress={() => 
+          api.sendPatientRecordDataToApi(date, patientID,bloodPressure, respiratoryRate, bloodOxygen, heartbeatRate,weight,height,temperature, status)
+        } >
             <Text style={styles.appButtonText}>Submit</Text>
         </TouchableOpacity>
      </View>

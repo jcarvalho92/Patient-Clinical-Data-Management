@@ -17,7 +17,7 @@ function ViewPatientScreen({route, navigation}) {
       <View style={styles.appViewData}>
 
         <Text style={styles.appTextTitle}>Patient Id</Text>
-        <Text style={styles.appTextData}>{patientInfo.id}</Text>
+        <Text style={styles.appTextData}></Text>
         <Text style={styles.appTextTitle}>Date Included</Text>
   <Text style={styles.appTextData}>{patientInfo.dateIncluded}</Text>
         <Text style={styles.appTextTitle}>Name</Text>
